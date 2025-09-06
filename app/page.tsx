@@ -25,9 +25,10 @@ export default function UploadPage() {
             if (!res.ok) throw new Error(`Upload failed: ${res.statusText}`);
             setStatus("done");
             form.reset();
-        } catch (err: any) {
+        } catch (err) {
+            const message = err instanceof Error ? err.message : "Upload failed";
             setStatus("error");
-            setError(err?.message || "Upload failed");
+            setError(message);
         }
     }
 
