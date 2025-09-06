@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Syllabus Calendar Generator",
+  title: "Syllabus → Calendar",
   description: "Created by Mason Simpson",
 };
 
