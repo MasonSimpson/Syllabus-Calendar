@@ -38,7 +38,7 @@ export default function UploadPage() {
             <p>Upload your syllabus file to generate a calendar.</p>
             <p>Created by Mason Simpson</p>
             <form onSubmit={handleSubmit}>
-                <input type="file" name="syllabus" accept=".pdf,.doc,.docx,.txt" required />
+                <input type="file" name="syllabus" accept=".pdf,.docx,.txt" required />
                 <button type="submit" disabled={status === "uploading"}>
                     {status === "uploading" ? "Uploading..." : "Upload"}
                 </button>
