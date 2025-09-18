@@ -2,11 +2,20 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
+// Ensure the API key is available at runtime
+const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) {
+    throw new Error("Missing OPENAI_API_KEY in environment");
+}
+
+// Handle file upload via POST request
 export async function POST(req: Request) {
     try {
+        // Parse the incoming form data
         const formData = await req.formData();
         const file = formData.get("syllabus");
 
+        // Validate the file
         if (!file || !(file instanceof Blob)) {
             return NextResponse.json({ok: false, error: "No file uploaded" }, { status: 400 });
         }
