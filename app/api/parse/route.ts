@@ -1,4 +1,4 @@
-import { ParsedSyllabus } from "@/types";
+import { Assignment, ParsedSyllabus } from "@/types";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -85,12 +85,14 @@ export async function POST(req: Request) {
             );
         }
 
-        parsed.assignments = parsed.assignments.filter(
-            (a: any) =>
-                typeof a?.title === "string" &&
-                typeof a?.dueDate === "string" &&
-                /^\d{4}-\d{2}-\d{2}$/.test(a.dueDate) // Basic date format check
-        );
+        parsed.assignments = Array.isArray(parsed.assignments)
+           ? (parsed.assignments as Array<{title?: unknown, dueDate?: unknown}>).filter(
+                (a) =>
+                    typeof a.title === "string" &&
+                    typeof a.dueDate === "string" &&
+                    /^\d{4}-\d{2}-\d{2}$/.test(a.dueDate) // Basic YYYY-MM-DD check
+            ) as Assignment[]
+           : [];
 
         return NextResponse.json({ ok: true, syllabus: parsed });
     } catch (err) {
