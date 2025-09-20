@@ -42,6 +42,7 @@ export async function POST(req: Request) {
             // @ts-expect-error pdf-parse has no types
             const pdfParse = (await import("pdf-parse/lib/pdf-parse.js")).default;
             const parsed = await pdfParse(buf);
+
             text = parsed.text || "";
         }
         else if (looksLikeDocx(mime, name)) {

@@ -1,9 +1,15 @@
+export type DayCode = "M" | "Tu" | "W" | "Th" | "F" | "Sa" | "Su";
+
 // Assignment structure
 export type Assignment = {
     title: string;
-    dueDate: string; // YYYY-MM-DD
-    dueTime?: string; // HH:MM (24h)
-    notes?: string;
+    dueDate?: string;
+    dueTime?: string | undefined;
+    notes?: string | undefined;
+    week?: number;
+    days?: DayCode[];
+    classTime?: string;
+    dateInferred?: boolean;
 };
 
 // Parsed syllabus structure
